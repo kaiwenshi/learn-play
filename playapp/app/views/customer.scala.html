@@ -1,0 +1,15 @@
+@import helper._
+
+@main("hello") {
+    <h1>Customer Form</h1>
+    @form(action=routes.HomeController.createCustomer()) {
+
+        <label for="Credit Limit">Credit Limit:</label>
+        <input type="text" name="Credit Limit" id="Credit Limit">
+
+        <label for="Customer Name">Customer Name:</label>
+        <input type="text" name="Customer Name" id="Customer Name">
+
+        <input type="submit" value="Submit">
+    }
+}

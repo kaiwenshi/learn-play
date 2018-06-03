@@ -5,6 +5,10 @@ import play.api._
 import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
+import models.Customer
+import play.api.Play.current
+import play.api.i18n.I18nSupport
+import play.api.i18n.MessagesApi
 
 
 /**
@@ -12,7 +16,7 @@ import play.api.data.Forms._
  * application's home page.
  */
 @Singleton
-class HomeController @Inject() extends Controller {
+class HomeController @Inject()(val messagesApi: MessagesApi) extends Controller with I18nSupport{
 
   /**
    * Create an Action to render an HTML page with a welcome message.
@@ -40,6 +44,19 @@ class HomeController @Inject() extends Controller {
     val loginRequest = loginForm.bindFromRequest.get
     Ok("Username was "+loginRequest.username)
   }
+
+  def customer = Action {
+    Ok(views.html.customer())
+  }
+
+  def createCustomer = Action { implicit request =>
+    customerForm.bindFromRequest().fold(
+      formWithErrors => BadRequest(views.html.customer()),
+      customer => Ok(s"Customer ${customer.name} created successfully"))
+  }
+
+  def customerForm = Form(mapping("Customer Name" -> text,
+    "Credit Limit" -> text)(Customer.apply)(Customer.unapply))
 
   def loginForm = Form(mapping("username" -> text)
       (LoginRequest.apply)(LoginRequest.unapply))

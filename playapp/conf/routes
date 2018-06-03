@@ -17,5 +17,8 @@ GET     /welcome                    controllers.HomeController.welcome
 
 GET     /about                      controllers.HomeController.about
 
+GET     /customer                   controllers.HomeController.customer
 
 POST    /handleForm                 controllers.HomeController.handleForm
+
+POST    /createCustomer             controllers.HomeController.createCustomer
