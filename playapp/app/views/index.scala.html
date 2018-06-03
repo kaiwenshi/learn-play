@@ -1,0 +1,23 @@
+@*
+ * This template takes a single argument, a String containing a
+ * message to display.
+ *@
+@(message: String)
+
+<!doctype html>
+<html>
+    <head>
+        <style>
+        body { padding:20px; }
+        label, input { display:block; margin-top:10px; }
+        </style>
+    </head>
+    <body>
+        <h1>@message</h1>
+        <form method="post" action="@routes.HomeController.handleForm()">
+            <label for="username">username:</label>
+            <input type="text" name="username" id="username">
+            <input type="submit" value="Submit form">
+        </form>
+    </body>
+</html>
